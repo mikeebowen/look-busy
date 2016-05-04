@@ -1,0 +1,29 @@
+{
+  "name": "look-busy",
+  "version": "0.1.1",
+  "description": "An API that puts out scrolling data to make you look busy at work",
+  "main": "./lib/server.js",
+  "preferGlobal": "true",
+  "bin": {
+    "look-busy": "bin/module.js"
+  },
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.13.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrbgit/look-busy.git"
+  },
+  "author": "Michael Bowen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrbgit/look-busy/issues"
+  },
+  "homepage": "https://github.com/mrbgit/look-busy#readme"
+}
