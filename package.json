@@ -1,6 +1,6 @@
 {
   "name": "look-busy",
-  "version": "0.1.9",
+  "version": "0.1.10",
   "description": "An API that puts out scrolling data to make you look busy at work",
   "main": "./lib/server.js",
   "preferGlobal": "true",
