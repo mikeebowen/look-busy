@@ -3,7 +3,7 @@
 
 let lib = require('../lib/index.js');
 
-let randomData = lib.getRandomData();
+let getRandomData = lib.getRandomData;
 
-// setInterval(randomData, 500);
-randomData();
+setInterval(lib.getRandomData, 500);
+// randomData();
