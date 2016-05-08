@@ -5,4 +5,4 @@ let lib = require('../lib/index.js');
 
 let randomData = lib.getRandomData();
 
-console.log(randomData);
+setInterval(randomData, 500);
