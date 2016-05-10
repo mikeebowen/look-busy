@@ -1,6 +1,6 @@
 {
   "name": "look-busy",
-  "version": "0.2.2",
+  "version": "0.3.2",
   "description": "An API that puts out scrolling data to make you look busy at work",
   "main": "./lib/server.js",
   "preferGlobal": "true",
@@ -9,7 +9,8 @@
   },
   "dependencies": {
     "colors": "^1.1.2",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "yargs": "^4.7.0"
   },
   "devDependencies": {},
   "scripts": {
