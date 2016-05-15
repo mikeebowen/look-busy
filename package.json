@@ -10,11 +10,16 @@
   "dependencies": {
     "colors": "^1.1.2",
     "express": "^4.13.4",
+    "to-type": "^1.1.0",
     "yargs": "^4.7.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-http": "^2.0.1",
+    "mocha": "^2.4.5"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "./node_modules/mocha/bin/mocha test/test-entry.js",
     "start": "node server.js"
   },
   "repository": {
