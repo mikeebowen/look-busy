@@ -28,7 +28,7 @@ You to enter:
 
 or 
 
-`look-busy --color clc.xterm\\(202\\).bgXterm\\(236\\)`
+`look-busy --color clc.xterm\(202\).bgXterm\(236\)`
 
 Go forth and look like you're doing something important!
 
