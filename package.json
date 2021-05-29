@@ -1,36 +1,44 @@
 {
-  "name": "look-busy",
-  "version": "0.4.1",
-  "description": "An API that puts out scrolling data to make you look busy at work",
-  "main": "./lib/server.js",
-  "preferGlobal": "true",
-  "bin": {
-    "look-busy": "bin/module.js"
-  },
-  "dependencies": {
-    "cli-color": "^1.1.0",
-    "express": "^4.13.4",
-    "progress": "^1.1.8",
-    "yargs": "^4.7.0"
-  },
-  "devDependencies": {
-    "chai": "^3.5.0",
-    "chai-http": "^2.0.1",
-    "mocha": "^2.4.5",
-    "to-type": "^1.1.0"
-  },
-  "scripts": {
-    "test": "./node_modules/mocha/bin/mocha test/test-entry.js",
-    "start": "node server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mrbgit/look-busy.git"
-  },
-  "author": "Michael Bowen",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mrbgit/look-busy/issues"
-  },
-  "homepage": "https://github.com/mrbgit/look-busy#readme"
+	"name": "look busy",
+	"version": "0.1.0",
+	"description": "",
+	"repository": "",
+	"license": "MIT",
+	"scripts": {
+		"clean": "rimraf dist",
+		"build": "npm run clean && tsc --pretty",
+		"test": "npm run build && mocha --compilers ts:ts-node/register --recursive test/**/*-spec.ts",
+		"watch": "npm run build -- --watch",
+		"watch:test": "npm run test -- --watch"
+	},
+	"author": {
+		"name": "Michael Bowen",
+		"email": "mikee.bowen@gmail.com"
+	},
+	"main": "dist/bin/app.js",
+	"typings": "dist/bin/app.d.ts",
+	"bin": {
+		"look-busy": "bin/look-busy"
+	},
+	"files": [
+		"bin",
+		"dist"
+	],
+	"devDependencies": {
+		"@types/chai": "^4.0.0",
+		"@types/commander": "^2.3.31",
+		"@types/mocha": "^2.2.39",
+		"@types/node": "^7.0.5",
+		"@types/sinon": "^2.3.0",
+		"@typescript-eslint/eslint-plugin": "^4.25.0",
+		"chai": "^4.0.1",
+		"mocha": "^3.2.0",
+		"rimraf": "^2.6.1",
+		"sinon": "^2.3.2",
+		"ts-node": "^3.0.4",
+		"typescript": "^2.2.1"
+	},
+	"dependencies": {
+		"commander": "^2.9.0"
+	}
 }
