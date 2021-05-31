@@ -20,18 +20,25 @@ class App {
     getData() {
         const i = Math.floor(Math.random() * this.apiList.length);
         const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
-        const showBar = Math.floor(Math.random() * 10) > 8;
+        const showBar = Math.floor(Math.random() * 100 + 1) > 95;
         const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
         if (showBar) {
-            const bar = new ProgressBar('[:bar] :rate/bps :percent :etas', { total: Math.floor(Math.random() * 100 + 1) + 30 });
-            const timer = setInterval(function () {
+            const bar = new ProgressBar('[:bar] :rate/bps :percent :etas', {
+                total: process.stdout.columns,
+            });
+            const timer = setInterval(() => {
                 bar.tick();
                 if (bar.complete) {
-                    console.log('\ncomplete\n');
                     clearInterval(timer);
+                    this.callApi(api);
                 }
-            }, 100);
+            }, 25);
         }
+        else {
+            this.callApi(api);
+        }
+    }
+    callApi(api) {
         axios_1.default.get(api)
             .then((data) => {
             Object.keys(data.data).forEach((key) => {

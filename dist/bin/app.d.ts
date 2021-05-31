@@ -5,4 +5,5 @@ export declare class App {
     constructor();
     initialize(): void;
     private getData;
+    private callApi;
 }

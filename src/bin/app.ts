@@ -20,48 +20,34 @@ export class App {
       .option('-m, --message [value]', 'Say hello!')
       .parse(process.argv);
 
-    // if (this.program.message != null) {
-
-    //   if (typeof this.program.message !== 'string') {
-    //     this.writer.write();
-    //   } else {
-    //     this.writer.write(this.program.message);
-    //   }
-
-    //   process.exit();
-    // }
-
-    // this.program.help();
-    // eslint-disable-next-line no-constant-condition
-    // while (1 > 0) {
-    //   axios.get(this.apiList[0])
-    //     .then((res: any) => {
-    //       console.log('🚀 ~ file: app.ts ~ line 41 ~ App ~ .then ~ res', res);
-
-    //     })
-    //     .catch((err: Error) => {
-    //       console.log(err.message || err);
-    //     });
-    // }
     this.getData();
   }
 
   private getData(): void {
     const i = Math.floor(Math.random() * this.apiList.length);
     const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
-    const showBar = Math.floor(Math.random() * 10) > 8;
+    const showBar = Math.floor(Math.random() * 100 + 1) > 95;
     const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
-
     if (showBar) {
-      const bar = new ProgressBar('[:bar] :rate/bps :percent :etas', { total: Math.floor(Math.random() * 100 + 1) + 30 });
-      const timer = setInterval(function () {
+      const bar = new ProgressBar(
+        '[:bar] :rate/bps :percent :etas',
+        {
+          total: process.stdout.columns,
+        },
+      );
+      const timer = setInterval(() => {
         bar.tick();
         if (bar.complete) {
-          console.log('\ncomplete\n');
           clearInterval(timer);
+          this.callApi(api);
         }
-      }, 100);
+      }, 25);
+    } else {
+      this.callApi(api);
     }
+  }
+
+  private callApi(api: string): void {
 
     axios.get(api)
       .then((data: any) => {
