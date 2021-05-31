@@ -20,9 +20,9 @@ class App {
     getData() {
         const i = Math.floor(Math.random() * this.apiList.length);
         const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
-        const showBar = Math.floor(Math.random() * 100 + 1) > 95;
+        const oneToOneHundred = Math.floor(Math.random() * 100 + 1);
         const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
-        if (showBar) {
+        if (oneToOneHundred > 95) {
             const bar = new ProgressBar('[:bar] :rate/bps :percent :etas', {
                 total: process.stdout.columns,
             });
@@ -30,6 +30,28 @@ class App {
                 bar.tick();
                 if (bar.complete) {
                     clearInterval(timer);
+                    process.stdout.write(`
+      MMM.           .MMM
+      MMMMMMMMMMMMMMMMMMM
+      MMMMMMMMMMMMMMMMMMM      ___________________________________
+     MMMMMMMMMMMMMMMMMMMMM    |                                   |
+    MMMMMMMMMMMMMMMMMMMMMMM   | Avoid administrative distraction. |
+   MMMMMMMMMMMMMMMMMMMMMMMM   |_   _______________________________|
+   MMMM::- -:::::::- -::MMMM    |/
+    MM~:~   ~:::::~   ~:~MM
+.. MMMMM::. .:::+:::. .::MMMMM ..
+     .MM::::: ._. :::::MM.
+        MMMM;:::::;MMMM
+ -MM        MMMMMMM
+ ^  M+     MMMMMMMMM
+     MMMMMMM MM MM MM
+          MM MM MM MM
+          MM MM MM MM
+       .~~MM~MM~MM~MM~~.
+    ~~~~MM:~MM~~~MM~:MM~~~~
+   ~~~~~~==~==~~~==~==~~~~~~
+    ~~~~~~==~==~==~==~~~~~~
+        :~==~==~==~==~~`);
                     this.callApi(api);
                 }
             }, 25);

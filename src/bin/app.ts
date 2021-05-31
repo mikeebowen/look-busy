@@ -26,9 +26,9 @@ export class App {
   private getData(): void {
     const i = Math.floor(Math.random() * this.apiList.length);
     const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
-    const showBar = Math.floor(Math.random() * 100 + 1) > 95;
+    const oneToOneHundred = Math.floor(Math.random() * 100 + 1);
     const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
-    if (showBar) {
+    if (oneToOneHundred > 95) {
       const bar = new ProgressBar(
         '[:bar] :rate/bps :percent :etas',
         {
