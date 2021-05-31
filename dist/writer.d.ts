@@ -1,3 +1,3 @@
 export declare class Writer {
-    write(message?: String): void;
+    write(message?: string): void;
 }
