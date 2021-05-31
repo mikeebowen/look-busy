@@ -1,9 +1,18 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.App = void 0;
 const commander = require("commander");
 const axios_1 = require("axios");
-const ProgressBar = require("progress");
+const Image = require('ascii-art-image');
 class App {
     constructor() {
         this.program = commander;
@@ -18,47 +27,48 @@ class App {
         this.getData();
     }
     getData() {
-        const i = Math.floor(Math.random() * this.apiList.length);
-        const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
-        const oneToOneHundred = Math.floor(Math.random() * 100 + 1);
-        const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
-        if (oneToOneHundred > 95) {
-            const bar = new ProgressBar('[:bar] :rate/bps :percent :etas', {
-                total: process.stdout.columns,
-            });
-            const timer = setInterval(() => {
-                bar.tick();
-                if (bar.complete) {
-                    clearInterval(timer);
-                    process.stdout.write(`
-      MMM.           .MMM
-      MMMMMMMMMMMMMMMMMMM
-      MMMMMMMMMMMMMMMMMMM      ___________________________________
-     MMMMMMMMMMMMMMMMMMMMM    |                                   |
-    MMMMMMMMMMMMMMMMMMMMMMM   | Avoid administrative distraction. |
-   MMMMMMMMMMMMMMMMMMMMMMMM   |_   _______________________________|
-   MMMM::- -:::::::- -::MMMM    |/
-    MM~:~   ~:::::~   ~:~MM
-.. MMMMM::. .:::+:::. .::MMMMM ..
-     .MM::::: ._. :::::MM.
-        MMMM;:::::;MMMM
- -MM        MMMMMMM
- ^  M+     MMMMMMMMM
-     MMMMMMM MM MM MM
-          MM MM MM MM
-          MM MM MM MM
-       .~~MM~MM~MM~MM~~.
-    ~~~~MM:~MM~~~MM~:MM~~~~
-   ~~~~~~==~==~~~==~==~~~~~~
-    ~~~~~~==~==~==~==~~~~~~
-        :~==~==~==~==~~`);
-                    this.callApi(api);
+        return __awaiter(this, void 0, void 0, function* () {
+            const i = Math.floor(Math.random() * this.apiList.length);
+            const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
+            const oneToOneHundred = Math.floor(Math.random() * 100 + 1);
+            const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
+            if (oneToOneHundred > 95) {
+                let complete = false;
+                const waitSymbols = ['︷', '︵', '︹', '︺', '︶', '︸', '︶', '︺', '︹', '︵'];
+                let i = 0;
+                process.stdout.write('\n');
+                const timer = setInterval(() => {
+                    process.stdout.write(waitSymbols[i]);
+                    i = ++i < waitSymbols.length ? i : 0;
+                    if (complete) {
+                        clearInterval(timer);
+                        setTimeout(() => {
+                            this.callApi(api);
+                        }, 3000);
+                    }
+                }, 100);
+                try {
+                    const response = yield axios_1.default.get('https://thatcopy.pw/catapi/rest/');
+                    const image = new Image({
+                        filepath: response.data.url,
+                        alphabet: 'variant4',
+                    });
+                    image.write((err, rendered) => {
+                        if (err) {
+                            return console.error(err.message || err);
+                        }
+                        complete = true;
+                        process.stdout.write('\n' + rendered);
+                    });
                 }
-            }, 25);
-        }
-        else {
-            this.callApi(api);
-        }
+                catch (error) {
+                    console.error(error.message || error);
+                }
+            }
+            else {
+                this.callApi(api);
+            }
+        });
     }
     callApi(api) {
         axios_1.default.get(api)

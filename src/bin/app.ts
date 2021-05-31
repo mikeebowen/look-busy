@@ -1,6 +1,7 @@
 import * as commander from 'commander';
 import axios from 'axios';
-import * as ProgressBar from 'progress';
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const Image = require('ascii-art-image');
 
 export class App {
 
@@ -23,25 +24,46 @@ export class App {
     this.getData();
   }
 
-  private getData(): void {
+  private async getData(): Promise<void> {
     const i = Math.floor(Math.random() * this.apiList.length);
     const ii = Math.floor(Math.random() * this.apiList[i].endPoints.length);
     const oneToOneHundred = Math.floor(Math.random() * 100 + 1);
     const api = this.apiList[i].api + this.apiList[i].endPoints[ii];
+
     if (oneToOneHundred > 95) {
-      const bar = new ProgressBar(
-        '[:bar] :rate/bps :percent :etas',
-        {
-          total: process.stdout.columns,
-        },
-      );
+      let complete = false;
+      const waitSymbols = ['︷', '︵', '︹', '︺', '︶', '︸', '︶', '︺', '︹', '︵'];
+      let i = 0;
+      process.stdout.write('\n');
       const timer = setInterval(() => {
-        bar.tick();
-        if (bar.complete) {
+        process.stdout.write(waitSymbols[i]);
+        i = ++i < waitSymbols.length ? i : 0;
+        if (complete) {
           clearInterval(timer);
-          this.callApi(api);
+          setTimeout(() => {
+            this.callApi(api);
+          }, 3000);
         }
-      }, 25);
+      }, 100);
+
+      try {
+        const response = await axios.get('https://thatcopy.pw/catapi/rest/');
+        const image = new Image({
+          filepath: response.data.url,
+          alphabet: 'variant4',
+        });
+
+        image.write((err: Error, rendered: string) => {
+          if (err) {
+            return console.error(err.message || err);
+          }
+          complete = true;
+          process.stdout.write('\n' + rendered);
+        });
+      } catch (error) {
+        console.error(error.message || error);
+      }
+
     } else {
       this.callApi(api);
     }

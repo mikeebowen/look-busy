@@ -40,8 +40,8 @@
     "typescript": "^4.3.2"
   },
   "dependencies": {
+    "ascii-art-image": "^1.4.0",
     "axios": "^0.21.1",
-    "commander": "^2.9.0",
-    "progress": "^2.0.3"
+    "commander": "^2.9.0"
   }
 }
