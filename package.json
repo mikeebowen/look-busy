@@ -33,7 +33,7 @@
     "@types/sinon": "^2.3.0",
     "@typescript-eslint/eslint-plugin": "^4.25.0",
     "chai": "^4.0.1",
-    "mocha": "^8.4.0",
+    "mocha": "^10.2.0",
     "rimraf": "^2.6.1",
     "sinon": "^2.3.2",
     "ts-node": "^3.0.4",
