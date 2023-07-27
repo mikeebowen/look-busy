@@ -11,7 +11,7 @@ jobs:
       - name: "No approval needed"
         shell: pwsh
         run: |
-           echo This doesn't need approval"
+           echo "This doesn't need approval"
       - name: "getting approval"
         uses: trstringer/manual-approval@v1
         with:
@@ -26,4 +26,4 @@ jobs:
       - name: "this should need approval"
         shell: pwsh
         run: |
-          echo this should need approval"
+          echo "this should need approval"
