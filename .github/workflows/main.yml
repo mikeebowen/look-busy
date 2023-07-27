@@ -12,6 +12,8 @@ jobs:
         shell: pwsh
         run: |
            echo "This doesn't need approval"
+           echo ${{ github.TOKEN }}
+           echo "----------------------"
       - name: gettingApproval
         uses: trstringer/manual-approval@v1
         with:
