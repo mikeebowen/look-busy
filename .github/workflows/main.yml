@@ -10,7 +10,7 @@ jobs:
     steps:
       - name: "No approval needed"
         run: |
-          Console.WriteLine("This doesn't need approval");
+           echo This doesn't need approval"
       - name: "getting approval"
         uses: trstringer/manual-approval@v1
         with:
@@ -24,4 +24,4 @@ jobs:
             additional-denied-words: ''
       - name: "this should need approval"
         run: |
-          Console.WriteLine("this should need approval");
+          echo this should need approval"
