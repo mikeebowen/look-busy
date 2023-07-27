@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: "No approval needed"
+        shell: pwsh
         run: |
            echo This doesn't need approval"
       - name: "getting approval"
@@ -23,5 +24,6 @@ jobs:
             additional-approved-words: ''
             additional-denied-words: ''
       - name: "this should need approval"
+        shell: pwsh
         run: |
           echo this should need approval"
