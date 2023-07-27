@@ -8,11 +8,11 @@ jobs:
     name: "Test Approval"
     runs-on: ubuntu-latest
     steps:
-      - name: "No approval needed"
+      - name: noApprovalNeeded
         shell: pwsh
         run: |
            echo "This doesn't need approval"
-      - name: "getting approval"
+      - name: gettingApproval
         uses: trstringer/manual-approval@v1
         with:
             secret: ${{ github.TOKEN }}
@@ -23,7 +23,7 @@ jobs:
             exclude-workflow-initiator-as-approver: false
             additional-approved-words: ''
             additional-denied-words: ''
-      - name: "this should need approval"
+      - name: thisShouldNeedApproval
         shell: pwsh
         run: |
           echo "this should need approval"
