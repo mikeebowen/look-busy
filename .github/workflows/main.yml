@@ -1,5 +1,7 @@
 name: ApprovalTest
-on: workflow_dispatch
+on: 
+  release:
+    types: [published]
 jobs:
   noApproval:
     name: "Test Approval"
