@@ -1,8 +1,5 @@
 name: ApprovalTest
-on:
-  push:
-    branches: 
-      - main
+on: workflow_dispatch
 jobs:
   noApproval:
     name: "Test Approval"
