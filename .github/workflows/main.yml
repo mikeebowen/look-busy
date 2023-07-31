@@ -1,9 +1,9 @@
 name: ApprovalTest
-on: 
+on:
   workflow_run:
-    workflows: 
-      - "Package"
-    types: 
+    workflows:
+      - Package
+    types:
       - completed
 jobs:
   releaseInfo: 
@@ -24,28 +24,28 @@ jobs:
         foreach ($file in (Get-ChildItem ${{github.workspace }}/releaseInfo" -Recurse *.txt)) {
           Write-Host $file
         }
-  noApproval:
-    name: "Test Approval"
-    runs-on: ubuntu-latest
-    steps:
-      - name: noApprovalNeeded
-        shell: pwsh
-        run: |
-           echo "This doesn't need approval"
-           echo ${{ github.TOKEN }}
-           echo "----------------------"
-      - name: gettingApproval
-        uses: trstringer/manual-approval@v1
-        with:
-            secret: ${{ github.TOKEN }}
-            approvers: mikeebowen
-            minimum-approvals: 1
-            issue-title: "Approval for publishing to Nuget.org"
-            issue-body: "Please approve or deny the deployment to Nuget.org"
-            exclude-workflow-initiator-as-approver: false
-            additional-approved-words: ''
-            additional-denied-words: ''
-      - name: thisShouldNeedApproval
-        shell: pwsh
-        run: |
-          echo "this should need approval"
+#   noApproval:
+#     name: "Test Approval"
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: noApprovalNeeded
+#         shell: pwsh
+#         run: |
+#            echo "This doesn't need approval"
+#            echo ${{ github.TOKEN }}
+#            echo "----------------------"
+#       - name: gettingApproval
+#         uses: trstringer/manual-approval@v1
+#         with:
+#             secret: ${{ github.TOKEN }}
+#             approvers: mikeebowen
+#             minimum-approvals: 1
+#             issue-title: "Approval for publishing to Nuget.org"
+#             issue-body: "Please approve or deny the deployment to Nuget.org"
+#             exclude-workflow-initiator-as-approver: false
+#             additional-approved-words: ''
+#             additional-denied-words: ''
+#       - name: thisShouldNeedApproval
+#         shell: pwsh
+#         run: |
+#           echo "this should need approval"
