@@ -19,11 +19,10 @@ jobs:
        path: ${{ github.workspace }}/release-info.txt
     - name: Check is workflow is release
       shell: pwsh
-      run: >
-        Write-Host "starting script"
-        foreach ($file in (Get-ChildItem ${{github.workspace }}/releaseInfo" -Recurse *.txt)) {
-          Write-Host $file
-        }
+      run: |
+         foreach($file in (Get-ChildItem "${{ github.workspace }}/releaseInfo" -Recurse -Include *.txt)) {
+             echo $file
+         }
 #   noApproval:
 #     name: "Test Approval"
 #     runs-on: ubuntu-latest
