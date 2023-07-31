@@ -16,7 +16,7 @@ jobs:
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: releaseInfo
-       path: ${{ github.workspace }}/release-info.txt
+       path: ${{ github.workspace }}/info/release-info.txt
     - name: Check is workflow is release
       shell: pwsh
       run: |
