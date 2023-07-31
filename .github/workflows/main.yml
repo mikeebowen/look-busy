@@ -20,7 +20,7 @@ jobs:
     - name: Check is workflow is release
       shell: pwsh
       run: |
-         foreach($file in (Get-ChildItem "${{ github.workspace }}/releaseInfo" -Recurse -Include *.txt)) {
+         foreach($file in (Get-ChildItem "/releaseInfo" -Recurse -Include *.txt)) {
              echo $file
          }
 #   noApproval:
