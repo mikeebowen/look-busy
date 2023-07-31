@@ -20,9 +20,10 @@ jobs:
     - name: Check is workflow is release
       shell: pwsh
       run: |
-         foreach($file in (Get-ChildItem "/releaseInfo" -Recurse -Include *.txt)) {
-             echo $file
-         }
+        echo ${{ github.workspace }}
+        $isRelease = Get-Content -Path ${{ github.workspace }}/info/release-info.txt
+        exho $isRelease
+        
 #   noApproval:
 #     name: "Test Approval"
 #     runs-on: ubuntu-latest
