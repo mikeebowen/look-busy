@@ -1,8 +1,29 @@
 name: ApprovalTest
 on: 
-  release:
-    types: [published]
+  workflow_run:
+    workflows: 
+      - "Package"
+    types: 
+      - completed
 jobs:
+  releaseInfo: 
+    name: Check for Release
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.conclusion == 'success'
+    steps:
+    - name: Download Release Info
+      uses: dawidd6/action-download-artifact@v2
+      with:
+       run_id: ${{ github.event.workflow_run.id }}
+       name: releaseInfo
+       path: ${{ github.workspace }}/release-info.txt
+    - name: Check is workflow is release
+      shell: pwsh
+      run: >
+        Write-Host "starting script"
+        foreach ($file in (Get-ChildItem ${{github.workspace }}/releaseInfo" -Recurse *.txt)) {
+          Write-Host $file
+        }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
