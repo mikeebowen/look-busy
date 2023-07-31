@@ -1,0 +1,29 @@
+name: Package
+
+on:
+  release: 
+    types: [published]
+jobs: 
+  sign:
+    name: "Sign Package"
+    if: github.event_name == 'release'
+    runs-on: windows-latest
+    steps: 
+         - name: Sign the NUPKGs
+           shell: pwsh
+           run: >
+            echo "not signing the nupkgs"
+  releaseInfo:
+    name: Release Info
+    needs: [sign]
+    runs-on: windows-latest
+    steps:
+      - name: Get Release Info
+        run: >
+          echo ${{ github.event_name == 'release' }} >> release-info.txt
+      - name: Upload Release Info
+        uses: actions/upload-artifact@v3
+        with:
+          name: releaseInfo
+          path: release-info.txt
+             
