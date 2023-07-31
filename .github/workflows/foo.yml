@@ -24,6 +24,5 @@ jobs:
       - name: Upload Release Info
         uses: actions/upload-artifact@v3
         with:
-          name: releaseInfo
-          path: release-info.txt
+          path: ${{ github.workspace }}\info\release-info.txt
              
