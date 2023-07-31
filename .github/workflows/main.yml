@@ -15,14 +15,14 @@ jobs:
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
-       name: releaseInfo
-       path: ${{ github.workspace }}/info/release-info.txt
+       name: Upload Release Info
+       path: info
     - name: Check is workflow is release
       shell: pwsh
       run: |
         echo ${{ github.workspace }}
         $isRelease = Get-Content -Path ${{ github.workspace }}/info/release-info.txt
-        exho $isRelease
+        echo $isRelease
         
 #   noApproval:
 #     name: "Test Approval"
