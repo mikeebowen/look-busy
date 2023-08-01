@@ -5,13 +5,13 @@ on:
       - Package
     types:
       - completed
+env:
+  IS_RELEASE: 'false'
 jobs:
   releaseInfo: 
     name: Check for Release
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
-    env:
-      IS_RELEASE: 'false'
     steps:
     - name: Download Release Info
 #       id: releaseData
