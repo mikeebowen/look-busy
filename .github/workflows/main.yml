@@ -15,13 +15,13 @@ jobs:
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
-       name: Upload Release Info
-       path: info
+       name: Download Release Info
+       path: release-info.txt
     - name: Check is workflow is release
       shell: pwsh
       run: |
-        echo ${{ github.workspace }}
-        $isRelease = Get-Content -Path ${{ github.workspace }}/info/release-info.txt
+        echo "running powershell"
+        $isRelease = Get-Content -Path release-info.txt
         echo $isRelease
         
 #   noApproval:
