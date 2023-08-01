@@ -20,7 +20,7 @@ jobs:
     - name: Check is workflow is release
       shell: bash
       run: |
-        value=`cat release-info.txt`
+        value=`cat ./release-info/release-info.txt`
         echo The result is $value
         
 #   noApproval:
