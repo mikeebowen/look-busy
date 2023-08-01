@@ -5,6 +5,8 @@ on:
       - Package
     types:
       - completed
+env:
+    is_release: "false"
 jobs:
   releaseInfo: 
     name: Check for Release
@@ -16,13 +18,13 @@ jobs:
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
-#          path: ${{ github.workspace }}/release-info.txt
-    - name: Check is workflow is release
+    - name: Check if workflow is release
       shell: pwsh
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        
+        echo "IS_RELEASE=$isRelease" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        Write-Host $Env:IS_RELEASE
 #   noApproval:
 #     name: "Test Approval"
 #     runs-on: ubuntu-latest
