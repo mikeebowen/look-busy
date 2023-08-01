@@ -6,7 +6,7 @@ on:
     types:
       - completed
 env:
-    is_release: "false"
+    IS_RELEASE: "false"
 jobs:
   releaseInfo: 
     name: Check for Release
@@ -23,7 +23,7 @@ jobs:
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        echo "IS_RELEASE=$isRelease" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
+        "IS_RELEASE=$isRelease" >> $env:GITHUB_ENV
         echo $Env:IS_RELEASE
 #   noApproval:
 #     name: "Test Approval"
