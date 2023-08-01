@@ -27,12 +27,16 @@ jobs:
         
         if ($isRelease -ne "true") {
           echo "not a release"
+          echo "::set-output name=isRelease::$isRelease"
         }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
+#     env: 
+#       IS_RELEASE: ${{ needs.releaseInfo.outputs.isRelease }}
+    if: needs.releaseInfo.outputs.isRelease == 'true'
     steps:
-      - name: noApprovalNeeded
+      - name: noApprov
         shell: pwsh
         run: |
            echo "This doesn't need approval"
