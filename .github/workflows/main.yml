@@ -28,7 +28,7 @@ jobs:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: releaseInfo
-    if: env.IS_RELEASE == 'true'
+    if: ${{ env.IS_RELEASE == 'true' }}
     steps:
       - name: noApprove
         shell: pwsh
