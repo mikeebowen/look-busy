@@ -21,7 +21,7 @@ jobs:
       shell: pwsh
       run: |
         echo "running powershell"
-        $isRelease = Get-Content release-info.txt
+        $isRelease = Get-Content -Path ./release-info.txt
         echo $isRelease
         
 #   noApproval:
