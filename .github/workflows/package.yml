@@ -24,5 +24,6 @@ jobs:
       - name: Upload Release Info
         uses: actions/upload-artifact@v3
         with:
+          name: release-info
           path: release-info.txt
              
