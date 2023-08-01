@@ -18,11 +18,10 @@ jobs:
        name: release-info
        path: ${{ github.workspace }}/release-info.txt
     - name: Check is workflow is release
-      shell: pwsh
+      shell: bash
       run: |
-        echo "running powershell"
-        $isRelease = Get-Content -Path ./release-info/release-info.txt
-        echo $isRelease
+        value=`cat release-info.txt`
+        echo The result is $value
         
 #   noApproval:
 #     name: "Test Approval"
