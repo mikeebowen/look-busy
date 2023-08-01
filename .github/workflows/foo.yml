@@ -20,7 +20,7 @@ jobs:
     steps:
       - name: Get Release Info
         run: >
-          echo ${{ github.event_name == 'release' }} >> release-info.txt
+          echo ${{ github.event_name == 'release' }} >> ${{ github.workspace }}\info\release-info.txt
       - name: Upload Release Info
         uses: actions/upload-artifact@v3
         with:
