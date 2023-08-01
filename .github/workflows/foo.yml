@@ -20,7 +20,6 @@ jobs:
     steps:
       - name: Get Release Info
         run: >
-          New-Item -ItemType Directory -Force -Path info
           echo ${{ github.event_name == 'release' }} >> info\release-info.txt
       - name: Upload Release Info
         uses: actions/upload-artifact@v3
