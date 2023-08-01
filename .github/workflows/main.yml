@@ -25,10 +25,7 @@ jobs:
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
         
-        if ($isRelease -ne "true") {
-          echo "not a release"
-          echo "::set-output name=isRelease::$isRelease"
-        }
+        echo "isRelease=$isRelease" >> $GITHUB_OUTPUT
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
