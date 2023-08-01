@@ -5,48 +5,51 @@ on:
       - Package
     types:
       - completed
-env:
-    IS_RELEASE: "false"
 jobs:
   releaseInfo: 
     name: Check for Release
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
+    outputs:
+      isRelease: ${{ steps.releaseInfo.outputs.isRelease }}
     steps:
     - name: Download Release Info
+      id: releaseInfo
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
     - name: Check if workflow is release
-      shell: pwsh
+      shell: bash
       run: |
-        $isRelease = Get-Content -Path release-info.txt
+        isRelease=`cat release-info.txt`
         echo The result is $isRelease
-        echo "IS_RELEASE=$isRelease" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-        echo $Env:IS_RELEASE
-#   noApproval:
-#     name: "Test Approval"
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: noApprovalNeeded
-#         shell: pwsh
-#         run: |
-#            echo "This doesn't need approval"
-#            echo ${{ github.TOKEN }}
-#            echo "----------------------"
-#       - name: gettingApproval
-#         uses: trstringer/manual-approval@v1
-#         with:
-#             secret: ${{ github.TOKEN }}
-#             approvers: mikeebowen
-#             minimum-approvals: 1
-#             issue-title: "Approval for publishing to Nuget.org"
-#             issue-body: "Please approve or deny the deployment to Nuget.org"
-#             exclude-workflow-initiator-as-approver: false
-#             additional-approved-words: ''
-#             additional-denied-words: ''
-#       - name: thisShouldNeedApproval
-#         shell: pwsh
-#         run: |
-#           echo "this should need approval"
+        
+        if ["$isRelease" != "true"]; then
+          echo "is not a release"
+        fi
+  noApproval:
+    name: "Test Approval"
+    runs-on: ubuntu-latest
+    steps:
+      - name: noApprovalNeeded
+        shell: pwsh
+        run: |
+           echo "This doesn't need approval"
+           echo ${{ github.TOKEN }}
+           echo "----------------------"
+      - name: gettingApproval
+        uses: trstringer/manual-approval@v1
+        with:
+            secret: ${{ github.TOKEN }}
+            approvers: mikeebowen
+            minimum-approvals: 1
+            issue-title: "Approval for publishing to Nuget.org"
+            issue-body: "Please approve or deny the deployment to Nuget.org"
+            exclude-workflow-initiator-as-approver: false
+            additional-approved-words: ''
+            additional-denied-words: ''
+      - name: thisShouldNeedApproval
+        shell: pwsh
+        run: |
+          echo "this should need approval"
