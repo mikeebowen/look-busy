@@ -3,6 +3,7 @@ name: Package
 on:
   release: 
     types: [published]
+  push:
 jobs: 
   sign:
     name: "Sign Package"
