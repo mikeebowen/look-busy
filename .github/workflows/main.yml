@@ -20,13 +20,16 @@ jobs:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
     - name: Check if workflow is release
-      shell: bash
+      shell: pwsh
       id: releaseData
       run: |
-        isRelease=`cat release-info.txt`
+        $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
         
-        echo "isRelease=$isRelease" >> $GITHUB_OUTPUT
+        if ($isRelease -ne "true") {
+          echo "not a release"
+          echo "::set-output name=isRelease::$isRelease"
+        }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
