@@ -29,8 +29,7 @@ jobs:
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
-#     env: 
-#       IS_RELEASE: ${{ needs.releaseInfo.outputs.isRelease }}
+    needs: releaseInfo
     if: needs.releaseInfo.outputs.isRelease == 'true'
     steps:
       - name: noApprov
