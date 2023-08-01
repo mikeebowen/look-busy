@@ -16,11 +16,11 @@ jobs:
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
-       path: ${{ github.workspace }}/release-info.txt
+#          path: ${{ github.workspace }}/release-info.txt
     - name: Check is workflow is release
       shell: bash
       run: |
-        value=`cat ./release-info/release-info.txt`
+        value=`cat release-info.txt`
         echo The result is $value
         
 #   noApproval:
