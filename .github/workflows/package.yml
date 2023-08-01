@@ -4,18 +4,15 @@ on:
   release: 
     types: [published]
   push:
-    branches:
-      - 'main'
 jobs: 
   sign:
-    name: "Sign Package"
-    if: github.event_name == 'release'
+    name: "Pack"
     runs-on: windows-latest
     steps: 
          - name: Sign the NUPKGs
            shell: pwsh
            run: >
-            echo "not signing the nupkgs"
+            echo "packing"
   releaseInfo:
     name: Release Info
     needs: [sign]
