@@ -24,7 +24,7 @@ jobs:
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
         echo "IS_RELEASE=$isRelease" | Out-File -FilePath $Env:GITHUB_ENV -Encoding utf8 -Append
-        Write-Host $Env:IS_RELEASE
+        echo $Env:IS_RELEASE
 #   noApproval:
 #     name: "Test Approval"
 #     runs-on: ubuntu-latest
