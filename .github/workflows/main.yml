@@ -14,7 +14,7 @@ jobs:
       isRelease: ${{ steps.releaseInfo.outputs.isRelease }}
     steps:
     - name: Download Release Info
-      id: releaseInfo
+      id: releaseData
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
@@ -30,7 +30,7 @@ jobs:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: releaseInfo
-    if: needs.releaseInfo.outputs.isRelease == 'true'
+    if: needs.releaseData.outputs.isRelease == 'true'
     steps:
       - name: noApprov
         shell: pwsh
