@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
     outputs:
-      isRelease: ${{ steps.releaseData.outputs.isRelease }}
+      isRelease: ${{ steps.releaseData.outputs.checkRelease }}
     steps:
     - name: Download Release Info
 #       id: releaseData
@@ -25,16 +25,12 @@ jobs:
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        
-        if ($isRelease -ne "true") {
-          echo "not a release"
-          echo "::set-output name=isRelease::$isRelease"
-        }
+        echo "::set-output name=checkRelease::$isRelease"
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: releaseInfo
-    if: needs.releaseData.outputs.isRelease == 'true'
+    if: needs.releaseData.outputs.checkRelease == 'true'
     steps:
       - name: noApprov
         shell: pwsh
