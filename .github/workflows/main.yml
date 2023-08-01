@@ -14,7 +14,9 @@ jobs:
     - name: Download Release Info
       uses: dawidd6/action-download-artifact@v2
       with:
+       run_id: ${{ github.event.workflow_run.id }}
        name: release-info
+       path: ${{ github.workspace }}/release-info.txt
     - name: Check is workflow is release
       shell: pwsh
       run: |
