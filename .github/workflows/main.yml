@@ -11,16 +11,17 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event.workflow_run.conclusion == 'success'
     outputs:
-      isRelease: ${{ steps.releaseInfo.outputs.isRelease }}
+      isRelease: ${{ steps.releaseData.outputs.isRelease }}
     steps:
     - name: Download Release Info
-      id: releaseData
+#       id: releaseData
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
     - name: Check if workflow is release
       shell: bash
+      id: releaseData
       run: |
         isRelease=`cat release-info.txt`
         echo The result is $isRelease
