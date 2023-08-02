@@ -28,7 +28,7 @@ jobs:
         if ($isRelease -eq 'true') {
           echo "is a release"
           echo "is_release=true" >> $env:GITHUB_OUTPUT
-          exit 0
+          exit 1
         }
   noApproval:
     name: "Test Approval"
