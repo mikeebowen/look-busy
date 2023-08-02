@@ -25,10 +25,10 @@ jobs:
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        echo "This is IS_RELEASE = $IS_RELEASE"
+        echo "This is IS_RELEASE = $env:IS_RELEASE"
         
-        if ($isRelease -eq 'true') {
-          echo "is a release"
+        if ($isRelease -ne 'true') {
+          echo "is not a release"
           echo "is_release=true" >> $env:GITHUB_OUTPUT
           exit 1
         }
