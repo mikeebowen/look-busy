@@ -24,6 +24,8 @@ jobs:
       id: releaseData
       run: |
         isRelease=`cat release-info.txt`
+        echo "isRelease = "
+        echo $isRelease
         if [ $isRelease != "true" ]; then
           echo "is a release"
           curl -L \
