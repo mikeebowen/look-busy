@@ -28,12 +28,13 @@ jobs:
         if ($isRelease -eq 'true') {
           echo "is a release"
           echo "is_release=true" >> $env:GITHUB_OUTPUT
+          exit 0
         }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: [releaseInfo]
-    if: needs.releaseInfo.outputs.is_release == 'true'
+#     if: needs.releaseInfo.outputs.is_release == 'true'
     steps:
       - name: noApprove
         shell: pwsh
