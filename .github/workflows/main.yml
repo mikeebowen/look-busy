@@ -20,7 +20,7 @@ jobs:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
     - name: Check if workflow is release
-      shell: bash
+      shell: pwsh
       id: releaseData
       run: |
         $isRelease = Get-Content -Path release-info.txt
