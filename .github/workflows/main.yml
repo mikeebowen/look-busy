@@ -26,7 +26,7 @@ jobs:
         isRelease=`cat release-info.txt`
         echo "isRelease = "
         echo $isRelease
-        if [ $isRelease != "true" ]; then
+        if [ "$isRelease" != "true" ]; then
           echo "is a release"
           curl -L \
             -X POST \
