@@ -25,8 +25,7 @@ jobs:
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        echo "This is IS_RELEASE ="
-        echo $IS_RELEASE
+        echo "This is IS_RELEASE = $IS_RELEASE"
         
         if ($isRelease -eq 'true') {
           echo "is a release"
