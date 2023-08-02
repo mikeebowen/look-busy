@@ -32,19 +32,19 @@ jobs:
           exit 0
         } else {
           echo "is a release"
-          echoxs "isRelease=true" >> $env:GITHUB_OUTPUT
+          echos "isRelease=true" >> $env:GITHUB_OUTPUT
         }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: [releaseInfo]
-    if: needs.releaseInfo.outputs.IS_RELEASE == 'false'
+#     if: needs.releaseInfo.outputs.IS_RELEASE == 'false'
     steps:
       - name: noApprove
         shell: pwsh
         run: |
            echo "This doesn't need approval"
-           echo ${{ github.TOKEN }}
+           echo ${{ needs.releaseInfo.outputs.IS_RELEASE }}
            echo "----------------------"
       - name: gettingApproval
         uses: trstringer/manual-approval@v1
