@@ -37,7 +37,7 @@ jobs:
     name: "Test Approval"
     runs-on: ubuntu-latest
     needs: [releaseInfo]
-    if: needs.releaseInfo.outputs.IS_RELEASE == 'false'
+    if: needs.releaseInfo.outputs.IS_RELEASE == 'true'
     steps:
       - name: noApprove
         shell: pwsh
