@@ -5,39 +5,40 @@ on:
       - Package
     types:
       - completed
-env:
-  IS_RELEASE: 'false'
 jobs:
   releaseInfo: 
     name: Check for Release
     runs-on: ubuntu-latest
+    outputs:
+      IS_RELEASE: ${{ steps.releaseInfoStep.outputs.isRelease}}
     if: github.event.workflow_run.conclusion == 'success'
     steps:
     - name: Download Release Info
-#       id: releaseData
+      id: releaseInfoStep
       uses: dawidd6/action-download-artifact@v2
       with:
        run_id: ${{ github.event.workflow_run.id }}
        name: release-info
     - name: Check if workflow is release
       shell: pwsh
-      id: releaseData
+#       id: releaseData
       run: |
         $isRelease = Get-Content -Path release-info.txt
         echo The result is $isRelease
-        echo "This is IS_RELEASE = $env:IS_RELEASE"
         
         if ($isRelease -ne 'true') {
           echo "is not a release"
-          echo "IS_RELEASE=true" >> $env:GITHUB_ENV
-          echo "updated IS_RELEASE = $env:IS_RELEASE"
+          echo "isRelease=false" >> $env:GITHUB_OUTPUT
           exit 0
+        } else {
+          echo "is a release"
+          echoxs "isRelease=true" >> $env:GITHUB_OUTPUT
         }
   noApproval:
     name: "Test Approval"
     runs-on: ubuntu-latest
-#     needs: [releaseInfo]
-#       if: env.IS_RELEASE == 'true'
+    needs: [releaseInfo]
+    if: needs.releaseInfo.outputs.IS_RELEASE == 'false'
     steps:
       - name: noApprove
         shell: pwsh
