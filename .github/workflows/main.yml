@@ -31,7 +31,7 @@ jobs:
           exit 0
         } else {
           echo "is a release"
-          echos "isRelease=true" >> $env:GITHUB_OUTPUT
+          echo "isRelease=true" >> $env:GITHUB_OUTPUT
         }
   noApproval:
     name: "Test Approval"
